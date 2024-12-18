@@ -1,0 +1,102 @@
+
+/* Style pour l'animation du calendrier */
+.calendar {
+    position: absolute;
+    top: 596px;
+    right: 0;
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    display: none;
+    font-family: 'Ubuntu Mono', monospace;
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Animation de montée et descente */
+    opacity: 0;
+    transform: translateY(20px); /* Position initiale en dehors de la vue */
+}
+
+/* Lorsque le calendrier est visible */
+.calendar.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Le calendrier remonte */
+}
+
+/* En-tête du calendrier avec les boutons de navigation */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #b0b0b0; /* Texte gris clair */
+}
+
+.calendar-header span {
+    cursor: pointer;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+    color: #c0c0c0; /* Gris clair pour les icônes */
+}
+
+.calendar-header span:hover {
+    background-color: #333; /* Fond gris foncé au survol */
+    color: #fff; /* Texte blanc au survol */
+}
+
+/* Jours du mois */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.calendar-days span {
+    text-align: center;
+    padding: 10px;
+    border-radius: 0; /* Retirer les coins arrondis */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    color: #b0b0b0; /* Texte gris clair pour les jours */
+}
+
+.calendar-days span:hover {
+    background-color: #3f3e3e; /* Bleu au survol */
+    color: #fff; /* Texte blanc au survol */
+}
+
+.calendar-days span.selected {
+    background-color: #28a745; /* Vert pour les jours sélectionnés */
+    color: #fff; /* Texte blanc pour la sélection */
+}
+
+/* Style pour le jour actuel */
+.calendar-days span.current-day {
+    background-color: #007bff; /* Couleur bleue pour le jour actuel */
+    color: #fff; /* Texte blanc */
+    font-weight: bold; /* Mettre en gras le texte */
+}
+
+
+/* Affichage des jours précédents du mois (cases vides) */
+.calendar-days span.empty {
+    background-color: transparent;
+    cursor: default;
+}
+
+/* Style du calendrier lors de l'affichage */
+.calendar.show {
+    display: block;
+}
+
+
+
+/* Cacher la fenêtre du calendrier quand on clique ailleurs */
+body {
+    font-family: 'Arial', sans-serif;
+}

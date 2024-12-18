@@ -1,0 +1,116 @@
+/* =========================================
+   TABLE DES MATIÈRES
+   ==========================================
+   0. Titre de la section contact
+   1. Espacement entre les champs du formulaire
+   2. Style des labels des champs
+   3. Style des champs de saisie
+   4. Effet de focus sur les champs de saisie
+   5. Style spécifique pour le champ de message
+   6. Style du bouton de soumission
+   7. Effet de survol sur le bouton
+   8. Effet lors du clic sur le bouton
+*/
+
+/* =========================================
+   0. Titre de la section contact
+   ========================================== */
+   #contact-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: #2d3748; /* Gris foncé */
+    margin-bottom: 2rem;
+}
+
+/* =========================================
+   1. Espacement entre les champs du formulaire
+   ========================================== */
+#name-field,
+#email-field,
+#message-field {
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   2. Style des labels des champs
+   ========================================== */
+#name-field label,
+#email-field label,
+#message-field label {
+    font-size: 1rem;
+    color: #4a5568; /* Gris moyen */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* =========================================
+   3. Style des champs de saisie
+   ========================================== */
+#name,
+#email,
+#message {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0; /* Gris clair */
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    color: #2d3748; /* Gris foncé */
+}
+
+/* =========================================
+   4. Effet de focus sur les champs de saisie
+   ========================================== */
+#name:focus,
+#email:focus,
+#message:focus {
+    outline: none;
+    border-color: #3182ce; /* Bleu clair */
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.4);
+}
+
+/* =========================================
+   5. Style spécifique pour le champ de message
+   ========================================== */
+#message {
+    font-size: 1rem; /* Taille de police constante */
+    resize: none; /* Empêche le redimensionnement */
+    height: 200px; /* Hauteur du champ de texte augmentée */
+    margin-left: 10px; /* Marge à gauche */
+    margin-right: 10px; /* Marge à droite */
+}
+
+/* =========================================
+   6. Style du bouton de soumission
+   ========================================== */
+#submit-button {
+    width: 40%; /* Largeur réduite du bouton */
+    background: linear-gradient(to right, #4299e1, #3182ce); /* Gradient bleu */
+    color: white;
+    padding: 0.75rem 0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    border: 2px solid #3182ce; /* Contour bleu */
+    display: block; /* Centrer le bouton */
+    margin: 0 auto; /* Centrer horizontalement */
+}
+
+/* =========================================
+   7. Effet de survol sur le bouton
+   ========================================== */
+#submit-button:hover {
+    background: linear-gradient(to right, #63b3ed, #3182ce); /* Gradient bleu plus clair */
+    transform: scale(1.05);
+}
+
+/* =========================================
+   8. Effet lors du clic sur le bouton
+   ========================================== */
+#submit-button:active {
+    transform: scale(0.98); /* Effet de pression */
+}

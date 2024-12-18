@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeu du Pendu - Technologie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <link rel="icon" href="./assets/pendu.png">
+  <meta name="description" content="Jeu du Pendu sur le thème des technologies">
+</head>
+<body>
+  <button id="backBtn" onclick="goBack()">
+    <span>Retour</span>
+</button>
+  <div class="game-container">
+    <div class="left-panel">
+      <h1>🎲 Jeu du Pendu</h1>
+      <p id="word" class="word-display">_ _ _ _ _</p>
+      
+      <div id="messageContainer">
+        <p id="message" class="game-message"></p>
+      </div>
+      
+      <div id="letters" class="letters-container"></div>
+      <button id="reset" class="reset-btn">Réinitialiser</button>
+    </div>
+    <div class="right-panel">
+      <div id="errors-container" class="errors-info">
+        <p>Erreurs : <span id="errors">0</span> / 8</p>
+      </div>
+      <canvas id="hangman" width="350" height="400" aria-label="Pendu"></canvas>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

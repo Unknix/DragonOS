@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/dragon.png" type="image/x-icon">
+    <title>DragonOS - Connexion</title>
+    <link rel="icon" href="/src/assets/dragon.png">
+    <link rel="stylesheet" href="/src/styles/login.css">
+</head>
+
+<body>
+    <div class="background-container"></div>
+
+    <div id="login-screen">
+        <img src="src/assets/dragon.png" alt="Logo" id="logo">
+
+        <h1>Bienvenue sur DragonOS</h1>
+
+        <div id="login-form">
+            <label for="pseudo">Entrez votre nom d'utilisateur :</label>
+            <div class="input-container">
+                <input type="text" id="pseudo" placeholder="Votre pseudo">
+                <button id="login-button">→</button>
+            </div>
+
+            <div class="error-message" id="error-message">
+                Échec de la connexion. Veuillez réessayer.
+            </div>
+        </div>
+    </div>
+    <script src="/src/js/login.js"></script>
+</body>
+
+</html>

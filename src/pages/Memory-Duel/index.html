@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Duel</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<style>
+            /* Style pour le bouton avec la flèche en haut à gauche */
+            #backBtn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #FF5733; /* Couleur de fond du bouton */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; /* Espacement entre la flèche et le texte */
+        }
+
+        /* Style du bouton au survol */
+        #backBtn:hover {
+            background-color: #C0392B;
+        }
+
+        /* Style de la flèche */
+        #backBtn::before {
+            content: '←'; /* Utilise un caractère de flèche */
+            font-size: 20px;
+        }
+
+        /* Optionnel: style du texte à côté de la flèche */
+        #backBtn span {
+            font-size: 16px;
+        }
+</style>
+<body>
+    <div class="game-container">
+        <button id="backBtn" onclick="goBack()">
+            <span>Retour</span>
+        </button>
+        <!-- Menu Principal -->
+        <div class="menu">
+            <h1>Memory Duel</h1>
+            <div class="menu-item">
+                <label for="username">Pseudo</label>
+                <input type="text" id="username" placeholder="Entrez votre pseudo" />
+            </div>
+            <div class="menu-item">
+                <label for="difficulty">Choisissez la difficulté</label>
+                <select id="difficulty">
+                    <option value="easy">Facile</option>
+                    <option value="medium">Moyen</option>
+                    <option value="hard">Difficile</option>
+                </select>
+            </div>
+            <div class="menu-item">
+                <label for="timerDuration">Choisissez le temps</label>
+                <select id="timerDuration">
+                    <option value="120">2 minutes</option>
+                    <option value="180">3 minutes</option>
+                    <option value="240">4 minutes</option>
+                </select>
+            </div>
+            <button id="startGameBtn">Démarrer le jeu</button>
+        </div>
+
+        <!-- Section du jeu -->
+        <div class="game-board-container" style="display: none;">
+            <!-- Mini Box -->
+            <div class="game-info-box">
+                <div id="player">Joueur: <span id="usernameDisplay"></span></div>
+                <div id="scoreDisplay">Score: <span id="score">0</span></div>
+                <div id="pairsLeft">Paires restantes: <span id="pairsRemaining"></span></div>
+                <div id="timer">Temps restant: <span id="timerDisplay">00:00</span></div>
+            </div>
+            <div class="game-board" id="gameBoard"></div>
+            <button id="newGameBtn" class="new-game-btn">Nouvelle Partie</button>
+        </div>
+    </div>
+
+    <script src="./js/game.js"></script>
+    <script>
+        // Fonction pour revenir à la page précédente
+        function goBack() {
+            window.history.back();
+        }
+        
+    </script>
+</body>
+</html>

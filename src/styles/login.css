@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('/src/assets/dragon.png') center no-repeat, #1e1e2ecc; /* Add background image and color */
+    background-size: 50%; /* Shrinks the background image */
+    background-position: center; /* Keeps the image centered */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/src/assets/dragon.png') center no-repeat, #1e1e2ecc; /* Same background image and color */
+    background-size: 50%; /* Shrinks the background image */
+    background-position: center; /* Keeps the image centered */
+    z-index: -1;
+}
+
+#login-screen {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid rgb(255, 255, 255);
+    transition: transform 0.4s ease;
+    transform: scale(0.9);
+}
+
+#logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+#login-form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 25px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]::placeholder {
+    color: #ddd;
+}
+
+button {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1;
+}
+
+button:hover {
+    color: #838181;
+}
+
+button:active {
+    color: #000000;
+}
+
+.error-message {
+    color: #ff4d4d;
+    margin-top: 20px;
+    font-size: 14px;
+    display: none;
+}

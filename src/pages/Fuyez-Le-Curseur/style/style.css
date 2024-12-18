@@ -1,0 +1,295 @@
+/* =========================================
+   TABLE DES MATIÈRES
+   ==========================================
+   0. Réinitialisation globale
+   1. Corps de la page
+   2. Conteneur principal du jeu
+   3. Menu principal
+   4. Titre du menu
+   5. Texte du menu
+   6. Bouton de démarrage
+   7 Conteneur pour le score et le niveau
+     7.5 Score
+   8. Niveau
+   9. Curseur
+   10. Écran de fin de jeu
+   11. Titre de l'écran de fin
+   12. Texte de l'écran de fin
+   13. Score final
+   14. Bouton de redémarrage
+   15. Animations
+   16. Bouton retour
+*/
+/* =========================================
+   0. Réinitialisation globale
+   ========================================= */
+* {
+    margin    : 0;
+    padding   : 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   1. Corps de la page
+   ========================================= */
+   body {
+    font-family    : 'Arial', sans-serif;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    height         : 100vh;
+    background     : linear-gradient(135deg, #ff4f58, #2a2a72); /* Gradient vibrant */
+    /* Ajout de couleurs plus contrastées */
+    overflow       : hidden;
+    color          : white;
+}
+
+/* =========================================
+   2. Conteneur principal du jeu
+   ========================================= */
+#game {
+    text-align     : center;
+    width          : 100%;
+    height         : 100%;
+    position       : relative;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    flex-direction : column;
+}
+
+/* =========================================
+   3. Menu principal
+   ========================================= */
+#menu {
+    position   : absolute;
+    top        : 50%;
+    left       : 50%;
+    transform  : translate(-50%, -50%);
+    color      : white;
+    opacity    : 1;
+    transition : opacity 1s ease-in-out;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    /* Ombre plus marquée */
+}
+
+/* =========================================
+   4. Titre du menu
+   ========================================= */
+#menu h1 {
+    font-size    : 3.5rem;
+    margin-bottom: 20px;
+    animation    : fadeIn 1.5s ease-out;
+    color        : #ffeb3b;
+    /* Jaune lumineux */
+}
+
+/* =========================================
+   5. Texte du menu
+   ========================================= */
+#menu p {
+    font-size    : 1.3rem;
+    margin-bottom: 30px;
+    animation    : fadeIn 2s ease-out;
+    color        : #f1f1f1;
+}
+
+/* =========================================
+   6. Bouton de démarrage
+   ========================================= */
+   #startBtn {
+    background-color: #ff9800; /* Jaune orangé lumineux */
+    color           : white;
+    border          : none;
+    padding         : 18px 35px;
+    font-size       : 20px;
+    font-weight     : bold;
+    border-radius   : 15px;
+    cursor          : pointer;
+    transition      : all 0.3s ease;
+    animation       : fadeIn 2.5s ease-out;
+}
+
+#startBtn:hover {
+    background-color: #f57c00; /* Un orange plus sombre */
+}
+
+
+/* =========================================
+   7 Conteneur pour le score et le niveau
+   ========================================= */
+   #scoreLevelContainer {
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    position        : absolute;
+    top             : 15px;
+    left            : 50%;
+    transform       : translateX(-50%);
+    width           : 60%;
+    padding         : 15px 30px;
+    border          : 2px solid #ff4f58; /* Rouge vif pour une touche dynamique */
+    border-radius   : 15px;
+    background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+    box-shadow      : 0 4px 10px rgba(0, 0, 0, 0.7);
+    color           : white;
+    font-weight     : bold;
+    text-shadow     : 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================
+   7.5 Score
+   ========================================= */
+#score {
+    font-size: 28px;
+}
+
+/* =========================================
+   8. Niveau
+   ========================================= */
+#level {
+    font-size: 22px;
+}
+
+/* =========================================
+   9. Curseur
+   ========================================= */
+#cursor {
+    width           : 50px;
+    height          : 50px;
+    background-color: #f44336;
+    /* Rouge vif */
+    position        : absolute;
+    border-radius   : 50%;
+    transition      : transform 0.05s ease, opacity 0.5s ease;
+    z-index         : 5;
+    opacity         : 0;
+    animation       : bounce 0.5s ease-in-out infinite;
+}
+
+/* =========================================
+   10. Écran de fin de jeu
+   ========================================= */
+   #gameOver {
+    display         : none;
+    position        : absolute;
+    top             : 50%;
+    left            : 50%;
+    transform       : translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9); /* Fond plus sombre */
+    padding         : 50px;
+    border-radius   : 15px;
+    color           : white;
+    box-shadow      : 0 10px 30px rgba(0, 0, 0, 0.5);
+    width           : 75%;
+    max-width       : 600px;
+    text-align      : center;
+    opacity         : 0;
+    animation       : fadeIn 1.5s ease-out forwards;
+}
+
+/* =========================================
+   11. Titre de l'écran de fin
+   ========================================= */
+   #gameOver h2 {
+    font-size    : 3.5rem;
+    margin-bottom: 20px;
+    color        : #ffeb3b; /* Jaune lumineux pour attirer l'attention */
+}
+/* =========================================
+   12. Texte de l'écran de fin
+   ========================================= */
+#gameOver p {
+    font-size    : 1.5rem;
+    margin-bottom: 30px;
+}
+
+/* =========================================
+   13. Score final
+   ========================================= */
+#finalScore {
+    font-size  : 2.5rem;
+    font-weight: bold;
+    color      : #ff5733;
+    /* Orange vif */
+}
+
+/* =========================================
+   14. Bouton de redémarrage
+   ========================================= */
+   #restartBtn {
+    background-color: #00bcd4; /* Bleu clair et vif */
+    color           : white;
+    border          : none;
+    padding         : 14px 30px;
+    font-size       : 18px;
+    font-weight     : bold;
+    border-radius   : 15px;
+    cursor          : pointer;
+    transition      : all 0.3s ease;
+}
+#restartBtn:hover {
+    background-color: #0097a7; /* Un bleu plus sombre */
+}
+
+
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* =========================================
+   16. Bouton retour
+   ========================================= */
+/* Style pour le bouton avec la flèche en haut à gauche */
+#backBtn {
+    position        : absolute;
+    top             : 10px;
+    left            : 10px;
+    padding         : 10px 15px;
+    font-size       : 16px;
+    background-color: #8bc34a; /* Vert vif */
+    color           : white;
+    border          : none;
+    border-radius   : 5px;
+    cursor          : pointer;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    gap             : 8px;
+}
+
+#backBtn:hover {
+    background-color: #689f38; /* Vert plus foncé */
+}
+
+/* Flèche et texte */
+#backBtn::before {
+    content  : '←';
+    font-size: 20px;
+}
+/* Optionnel: style du texte à côté de la flèche */
+#backBtn span {
+    font-size: 16px;
+}
