@@ -1,18 +1,28 @@
 {
-  "name": "projet",
+  "name": "DragonOS",
   "version": "1.0.0",
+  "description": "DragonOS est une vitrine interactive simulant un système d'exploitation avec une interface en HTML/CSS, conçue pour démontrer les fonctionnalités d'une interface utilisateur moderne.",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "html",
+    "css",
+    "interface utilisateur",
+    "système d'exploitation simulé",
+    "vitrine",
+    "web-app"
+  ],
+  "author": "Unknix",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "multer": "^1.4.5-lts.1",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
