@@ -1,27 +1,28 @@
-
 /* Style pour l'animation du calendrier */
 .calendar {
-    position: absolute;
-    top: 596px;
-    right: 0;
-    background-color: #1e1e1e;
-    border: 1px solid #444;
-    padding: 15px;
-    width: 250px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    position: fixed; /* Changé de absolute à fixed */
+    bottom: 50px; /* Au lieu de top: 450px, on utilise bottom pour le positionner au-dessus de la barre des tâches */
+    right: 20px;
+    background: rgba(30, 30, 46, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    width: 350px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     z-index: 100;
     display: none;
-    font-family: 'Ubuntu Mono', monospace;
-    transition: transform 0.5s ease, opacity 0.5s ease; /* Animation de montée et descente */
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
-    transform: translateY(20px); /* Position initiale en dehors de la vue */
+    transform: translateY(20px) scale(0.95);
 }
 
 /* Lorsque le calendrier est visible */
 .calendar.show {
     display: block;
     opacity: 1;
-    transform: translateY(0); /* Le calendrier remonte */
+    transform: translateY(0) scale(1);
 }
 
 /* En-tête du calendrier avec les boutons de navigation */
@@ -29,72 +30,103 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #b0b0b0; /* Texte gris clair */
+    margin-bottom: 20px;
+    padding: 0 10px;
 }
 
 .calendar-header span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    font-weight: 500;
     cursor: pointer;
-    padding: 5px;
-    transition: background-color 0.3s ease;
-    color: #c0c0c0; /* Gris clair pour les icônes */
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
 .calendar-header span:hover {
-    background-color: #333; /* Fond gris foncé au survol */
-    color: #fff; /* Texte blanc au survol */
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
 }
 
 /* Jours du mois */
 .calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.calendar-days span {
-    text-align: center;
+    gap: 8px;
     padding: 10px;
-    border-radius: 0; /* Retirer les coins arrondis */
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    color: #b0b0b0; /* Texte gris clair pour les jours */
 }
 
-.calendar-days span:hover {
-    background-color: #3f3e3e; /* Bleu au survol */
-    color: #fff; /* Texte blanc au survol */
+/* Jours de la semaine */
+.calendar-days .day-name {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 0;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calendar-days span:not(.day-name) {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    padding: 8px;
+}
+
+.calendar-days span:hover:not(.empty) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.calendar-days span.current-day {
+    background: linear-gradient(45deg, #302b63, #24243e);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(48, 43, 99, 0.3);
 }
 
 .calendar-days span.selected {
-    background-color: #28a745; /* Vert pour les jours sélectionnés */
-    color: #fff; /* Texte blanc pour la sélection */
+    background: linear-gradient(45deg, #28a745, #1e8535);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
-
-/* Style pour le jour actuel */
-.calendar-days span.current-day {
-    background-color: #007bff; /* Couleur bleue pour le jour actuel */
-    color: #fff; /* Texte blanc */
-    font-weight: bold; /* Mettre en gras le texte */
-}
-
 
 /* Affichage des jours précédents du mois (cases vides) */
 .calendar-days span.empty {
-    background-color: transparent;
+    background: transparent;
     cursor: default;
+    color: rgba(255, 255, 255, 0.2);
 }
 
-/* Style du calendrier lors de l'affichage */
-.calendar.show {
-    display: block;
+/* Animation de fond subtile */
+.calendar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    background: linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+    z-index: -1;
 }
 
-
+/* Effet de hover global */
+.calendar:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+}
 
 /* Cacher la fenêtre du calendrier quand on clique ailleurs */
 body {

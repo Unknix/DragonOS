@@ -11,6 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/styles/contact.css">
 </head>
 
 <body>
@@ -49,7 +50,7 @@
                 <!-- Les jours du mois seront générés par JavaScript -->
             </div>
         </div>
-        
+
         <div id="start-menu" class="start-menu">
             <div id="menu-header">Démarrer</div>
             <div id="pinned-apps">
@@ -116,51 +117,166 @@
                     <span class="maximize">❐</span>
                     <span class="close">⤬</span>
                 </div>
-                <img src="/src/assets/profile.png" alt="Avatar" class="profile-avatar">
-                <h3>${req.session.pseudo}</h3>
+                
+                <div class="profile-avatar-container">
+                    <img src="/src/assets/profile.png" alt="Avatar" class="profile-avatar">
+                    <div class="profile-status"></div>
+                </div>
+                
+                <div class="profile-info-header">
+                    <h2>Amanda Dragon</h2>
+                    <p>Développeuse Full Stack</p>
+                </div>
             </div>
-            <div class="profile-info">
-                <p><span>Email:</span> ${req.session.pseudo}@secure.fr</p>
-                <p><span>Rôle:</span> Utilisateur (Administrateur)</p>
-                <p><span>Date de création:</span> 01/01/2020</p>
-                <p><span>Dernière connexion:</span> 12/12/2024</p>
-                <p><span>Statut:</span> En ligne</p>
+
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <div class="stat-value">127</div>
+                    <div class="stat-label">Projets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">1.4k</div>
+                    <div class="stat-label">Contributions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">892</div>
+                    <div class="stat-label">Commits</div>
+                </div>
             </div>
-            <div class="profile-actions">
-                <button id="edit-bio-btn">Modifier la biographie</button>
-                <button>Déconnexion</button>
+
+            <div class="profile-content">
+                <div class="profile-section">
+                    <h3><i class="fas fa-info-circle"></i> Biographie</h3>
+                    <p class="profile-bio">Passionnée de développement web et d'innovation technologique. Je crée des solutions web modernes et intuitives.</p>
+                </div>
+
+                <div class="profile-section">
+                    <h3><i class="fas fa-envelope"></i> Contact</h3>
+                    <p class="profile-bio">amanda.dragon@secure.fr</p>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="profile-button primary-button">
+                        <i class="fas fa-edit"></i>
+                        Modifier le profil
+                    </button>
+                    <button class="profile-button secondary-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Déconnexion
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- Fenêtre du navigateur -->
         <div id="browser-window" class="browser-window">
             <div class="browser-header">
-                <div class="browser-logo">
-                    <img src="/src/assets/buddy.png" alt="Logo du navigateur">
+                <div class="browser-tabs">
+                    <div class="browser-tab active">
+                        <img src="/src/assets/buddy.png" alt="Home">
+                        <span>Nouvelle page</span>
+                    </div>
                 </div>
-
+                <div class="browser-controls">
+                    <i class="fas fa-arrow-left browser-control"></i>
+                    <i class="fas fa-arrow-right browser-control"></i>
+                    <i class="fas fa-redo browser-control"></i>
+                </div>
                 <div class="url-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" value="www.GDbuddy.com" readonly>
+                    <i class="fas fa-lock"></i>
+                    <input type="text" readonly value="gdbuddy.com">
                 </div>
-
                 <div class="window-controls">
                     <span class="minimize">⎯</span>
                     <span class="maximize">❐</span>
                     <span class="close">⤬</span>
                 </div>
             </div>
-
             <div class="browser-content">
-                <div class="menu-container">
-                    <div class="menu-item" onclick="loadContactPage()">
-                        <link rel="stylesheet" href="/src/styles/contact.css">
-                        <i class="fas fa-address-book"></i>
-                        <div class="menu-item-title">Contact</div>
+                <div class="browser-center-content">
+                    <div class="browser-homepage">
+                        <div class="info-header">
+                            <img src="/src/assets/profile.png" alt="Profile">
+                            <div class="info-header-content">
+                                <h1>Amanda Dragon</h1>
+                                <p>Développeuse Web Full Stack</p>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-container">
+                            <div class="menu-item" onclick="loadContactPage()">
+                                <i class="fas fa-address-book"></i>
+                                <div class="menu-item-title">Contact</div>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-project-diagram"></i>
+                                <div class="menu-item-title">Projets</div>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-user-circle"></i>
+                                <div class="menu-item-title">À propos</div>
+                            </div>
+                            <div class="menu-item">
+                                <i class="fas fa-cog"></i>
+                                <div class="menu-item-title">Services</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Ajouter ceci après la div browser-window -->
+
+        <div class="file-explorer">
+            <div class="explorer-header">
+                <div class="explorer-title">Explorateur de fichiers</div>
+                <div class="window-controls">
+                    <span class="minimize">⎯</span>
+                    <span class="maximize">❐</span>
+                    <span class="close">⤬</span>
+                </div>
+            </div>
+            <div class="explorer-path">
+                /home/user/
+            </div>
+            <div class="explorer-body">
+                <div class="explorer-sidebar">
+                    <div class="explorer-sidebar-item">
+                        <i class="fas fa-home"></i>
+                        <span>Accueil</span>
+                    </div>
+                    <div class="explorer-sidebar-item">
+                        <i class="fas fa-desktop"></i>
+                        <span>Bureau</span>
+                    </div>
+                    <div class="explorer-sidebar-item">
+                        <i class="fas fa-download"></i>
+                        <span>Téléchargements</span>
+                    </div>
+                    <div class="explorer-sidebar-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Documents</span>
+                    </div>
+                    <div class="explorer-sidebar-item">
+                        <i class="fas fa-image"></i>
+                        <span>Images</span>
+                    </div>
+                    <div class="explorer-sidebar-item">
+                        <i class="fas fa-music"></i>
+                        <span>Musique</span>
+                    </div>
+                    <div class="explorer-sidebar-item">
+                        <i class="fas fa-video"></i>
+                        <span>Vidéos</span>
+                    </div>
+                </div>
+                <div class="explorer-content">
+                    <div class="explorer-files">
+                        <!-- Les fichiers seront générés dynamiquement par JavaScript -->
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="context-menu" class="context-menu">

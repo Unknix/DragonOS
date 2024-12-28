@@ -28,28 +28,49 @@ function loadCalendar() {
     // Effacer les anciens jours
     calendarDaysElement.innerHTML = '';
 
-    // Obtenir le premier jour du mois et le nombre de jours dans ce mois
+    // Ajouter les noms des jours de la semaine
+    const weekDays = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+    weekDays.forEach(day => {
+        const dayName = document.createElement('span');
+        dayName.className = 'day-name';
+        dayName.innerText = day;
+        calendarDaysElement.appendChild(dayName);
+    });
+
+    // Obtenir le premier jour du mois et le nombre de jours
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
-    const firstDayOfWeek = firstDay.getDay();
     const daysInMonth = lastDay.getDate();
+    let firstDayOfWeek = firstDay.getDay();
 
-    // Ajouter les jours du mois
+    // Ajouter les jours vides du mois précédent
     for (let i = 0; i < firstDayOfWeek; i++) {
-        calendarDaysElement.appendChild(document.createElement('span')); // Ajouter des cases vides pour les jours précédents
+        const emptyDay = document.createElement('span');
+        emptyDay.className = 'empty';
+        calendarDaysElement.appendChild(emptyDay);
     }
 
+    // Ajouter les jours du mois
     for (let day = 1; day <= daysInMonth; day++) {
         const dayElement = document.createElement('span');
         dayElement.innerText = day;
 
-        // Vérifier si c'est le jour actuel dans le mois affiché
-        if (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
-            dayElement.classList.add('current-day'); // Ajouter une classe spéciale pour le jour actuel uniquement si c'est le mois actuel
+        // Vérifier si c'est le jour actuel
+        const today = new Date();
+        if (day === today.getDate() && 
+            month === today.getMonth() && 
+            year === today.getFullYear()) {
+            dayElement.classList.add('current-day');
         }
 
+        // Ajouter l'événement click
         dayElement.addEventListener('click', () => {
-            alert(`Vous avez sélectionné le ${day} ${getMonthName(month)} ${year}`);
+            // Retirer la sélection précédente
+            const previousSelected = calendarDaysElement.querySelector('.selected');
+            if (previousSelected) {
+                previousSelected.classList.remove('selected');
+            }
+            dayElement.classList.add('selected');
         });
 
         calendarDaysElement.appendChild(dayElement);

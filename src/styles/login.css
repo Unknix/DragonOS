@@ -1,58 +1,158 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin     : 0;
+    padding    : 0;
+    box-sizing : border-box;
+    user-select: none;
+    /* Empêche la sélection de texte */
+    cursor     : default;
+    /* Curseur par défaut au lieu du curseur texte */
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('/src/assets/dragon.png') center no-repeat, #1e1e2ecc; /* Add background image and color */
-    background-size: 50%; /* Shrinks the background image */
-    background-position: center; /* Keeps the image centered */
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
+    font-family        : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background         : linear-gradient(45deg, #1e1e2e, #302b63, #24243e);
+    background-size    : 400% 400%;
+    background-position: center;
+    /* Keeps the image centered */
+    color              : #fff;
+    display            : flex;
+    align-items        : center;
+    justify-content    : center;
+    height             : 100vh;
+    overflow           : hidden;
+    position           : relative;
+    animation          : gradientBG 15s ease infinite;
+}
+
+body::before {
+    content   : "";
+    position  : absolute;
+    width     : 200%;
+    height    : 200%;
+    top       : -50%;
+    left      : -50%;
+    z-index   : -1;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+    animation : rotate 25s linear infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .background-container {
+    position           : absolute;
+    top                : 0;
+    left               : 0;
+    width              : 100%;
+    height             : 100%;
+    background         : none;
+    background-size    : 50%;
+    /* Shrinks the background image */
+    background-position: center;
+    /* Keeps the image centered */
+    z-index            : -1;
+    overflow           : hidden;
+}
+
+.background-container::after {
+    content : '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/src/assets/dragon.png') center no-repeat, #1e1e2ecc; /* Same background image and color */
-    background-size: 50%; /* Shrinks the background image */
-    background-position: center; /* Keeps the image centered */
-    z-index: -1;
+    top     : 0;
+    left    : 0;
+    width   : 100%;
+    height  : 100%;
+    background: repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.05) 0px,
+            rgba(255, 255, 255, 0.05) 2px,
+            transparent 2px,
+            transparent 8px);
+    animation: movePattern 15s linear infinite;
+}
+
+@keyframes movePattern {
+    0% {
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    100% {
+        transform: translateX(50%) translateY(50%);
+    }
 }
 
 #login-screen {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(15px);
-    max-width: 400px;
-    width: 100%;
-    border: 2px solid rgb(255, 255, 255);
-    transition: transform 0.4s ease;
-    transform: scale(0.9);
+    text-align     : center;
+    background     : rgba(255, 255, 255, 0.15);
+    padding        : 50px;
+    border-radius  : 20px;
+    box-shadow     : 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+    backdrop-filter: blur(20px);
+    max-width      : 450px;
+    width          : 90%;
+    border         : 2px solid rgba(255, 255, 255, 0.25);
+    transition     : all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform      : scale(0.95);
+}
+
+#login-screen:hover {
+    transform : scale(1);
+    box-shadow: 0 15px 45px 0 rgba(31, 38, 135, 0.5);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity  : 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity  : 1;
+        transform: scale(0.9);
+    }
 }
 
 #logo {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 20px;
+    width            : 140px;
+    height           : 140px;
+    margin-bottom    : 30px;
+    pointer-events   : none;
+    /* Empêche toute interaction avec le logo */
+    -webkit-user-drag: none;
+    /* Empêche le drag sur webkit */
+    user-drag        : none;
+    /* Empêche le drag sur autres navigateurs */
+}
+
+/* Suppression du hover effect */
+#logo:hover {
+    transform: none;
 }
 
 h1 {
-    font-size: 26px;
-    margin-bottom: 30px;
+    font-size     : 32px;
+    margin-bottom : 35px;
+    font-weight   : 600;
+    letter-spacing: 1px;
 }
 
 #login-form {
@@ -60,49 +160,62 @@ h1 {
 }
 
 label {
-    display: block;
+    display      : block;
     margin-bottom: 12px;
-    font-size: 18px;
+    font-size    : 18px;
 }
 
 .input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
+    position     : relative;
+    display      : flex;
+    align-items  : center;
+    width        : 100%;
+    margin-bottom: 25px;
 }
 
 input[type="text"] {
-    width: 100%;
-    padding: 12px 40px 12px 12px;
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 16px;
-    margin-bottom: 25px;
-    transition: border-color 0.3s ease;
+    width           : 100%;
+    padding         : 15px 45px 15px 20px;
+    border-radius   : 12px;
+    border          : 2px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
+    color           : #fff;
+    font-size       : 17px;
+    caret-color     : transparent;
+    cursor          : default;
+    /* Force le curseur par défaut même sur l'input */
+    user-select     : none;
 }
 
 input[type="text"]::placeholder {
     color: #ddd;
 }
 
+input[type="text"]:focus {
+    border-color    : rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow      : 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
 button {
-    position: absolute;
-    right: 12px;
-    top: 10px;
+    position  : absolute;
+    right     : 15px;
+    top       : 50%;
+    transform : translateY(-50%);
     background: transparent;
-    border: none;
-    font-size: 20px;
-    color: #fff;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    z-index: 1;
+    border    : none;
+    font-size : 22px;
+    color     : rgba(255, 255, 255, 0.8);
+    cursor    : pointer;
+    /* Garde le curseur pointer pour le bouton */
+    transition: all 0.3s ease;
+    padding   : 8px;
 }
 
 button:hover {
-    color: #838181;
+    color      : #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    transform  : translateY(-50%) scale(1.15);
 }
 
 button:active {
@@ -110,8 +223,52 @@ button:active {
 }
 
 .error-message {
-    color: #ff4d4d;
-    margin-top: 20px;
-    font-size: 14px;
-    display: none;
+    color      : #ff6b6b;
+    margin-top : 25px;
+    font-size  : 15px;
+    font-weight: 500;
+    opacity    : 0;
+    transform  : translateY(-10px);
+    transition : all 0.3s ease;
+}
+
+.error-message.visible {
+    opacity  : 1;
+    transform: translateY(0);
+}
+
+/* Nouvelles classes pour les états de chargement et de succès */
+.loading {
+    opacity       : 0.7;
+    pointer-events: none;
+}
+
+.success {
+    border-color: #4CAF50 !important;
+}
+
+/* Ajout d'un effet de particules flottantes */
+.particle {
+    position      : fixed;
+    pointer-events: none;
+    opacity       : 0;
+    background    : white;
+    border-radius : 50%;
+    animation     : float 6s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) translateX(0px);
+        opacity  : 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity  : 0;
+    }
 }

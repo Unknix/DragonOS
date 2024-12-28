@@ -10,6 +10,9 @@
    6. Style du bouton de soumission
    7. Effet de survol sur le bouton
    8. Effet lors du clic sur le bouton
+   9. Style de la conteneur de contact
+   10. Style du formulaire de contact
+   11. Style des groupes de champs
 */
 
 /* =========================================
@@ -113,4 +116,254 @@
    ========================================== */
 #submit-button:active {
     transform: scale(0.98); /* Effet de pression */
+}
+
+/* =========================================
+   9. Style de la conteneur de contact
+   ========================================== */
+.contact-container {
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 40px;
+    overflow-y: auto;
+    overflow-x: hidden; /* Empêche uniquement le défilement horizontal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Scrollbar personnalisé */
+.contact-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.contact-container::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+.contact-container::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 3px;
+}
+
+.contact-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.contact-container h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+/* =========================================
+   10. Style du formulaire de contact
+   ========================================== */
+.contact-form {
+    max-width: 800px; /* Augmenté de 600px à 800px */
+    width: 90%; /* Ajusté pour éviter le débordement */
+    margin: 0 auto;
+    padding: 40px; /* Augmenté de 20px à 40px */
+    background: #2a2a2a;
+    border-radius: 12px; /* Augmenté de 8px à 12px */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   11. Style des groupes de champs
+   ========================================== */
+.form-group {
+    position: relative;
+    margin-bottom: 35px; /* Augmenté de 25px à 35px */
+}
+
+.form-group label {
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    background: #2a2a2a;
+    padding: 0 8px;
+    color: #999;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.form-group input,
+.form-group textarea {
+    width: calc(100% - 2px); /* Ajustement pour tenir compte des bordures */
+    box-sizing: border-box;
+    padding: 20px; /* Augmenté de 15px à 20px */
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px; /* Augmenté de 14px à 16px */
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #666;
+    opacity: 1;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #0078d4;
+    box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label {
+    color: #0078d4;
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    min-height: 150px; /* Augmenté de 120px à 150px */
+    resize: vertical;
+}
+
+.contact-form button {
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #6c63ff, #ff6584);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.2);
+}
+
+.contact-form button:active {
+    transform: translateY(0);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px; /* Augmenté de 30px à 40px */
+}
+
+.form-header h2 {
+    font-size: 32px; /* Augmenté de 24px à 32px */
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.form-header p {
+    color: #999;
+    font-size: 16px; /* Augmenté de 14px à 16px */
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background: #0086f0;
+    transform: translateY(-2px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.contact-info {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Rend les colonnes responsive */
+    gap: 20px;
+    width: 95%; /* Ajusté pour éviter le débordement */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-item {
+    text-align: center;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.info-item i {
+    font-size: 24px;
+    color: #6c63ff;
+    margin-bottom: 16px;
+}
+
+.info-item h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.info-item p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Style pour le message de succès */
+.success-message {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Ajustements pour les petits écrans */
+@media screen and (max-width: 768px) {
+    .contact-form {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .info-item {
+        padding: 15px;
+    }
 }
