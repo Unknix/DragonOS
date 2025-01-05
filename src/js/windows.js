@@ -872,8 +872,8 @@ function getHomePageContent() {
             <div class="info-header">
                 <img src="/src/assets/profile.png" alt="Profile">
                 <div class="info-header-content">
-                    <h1>Amanda Dragon</h1>
-                    <p>Développeuse Web Full Stack</p>
+                    <h1>Unknix</h1>
+                    <p>Développeur Web Full Stack</p>
                 </div>
             </div>
             
