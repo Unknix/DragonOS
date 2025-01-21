@@ -38,8 +38,6 @@ Pour installer DragonOS sur votre machine, suivez ces étapes :
 4. Lancez l'application :
 ```
    npm run start
-<<<<<<< HEAD
+
 ```
-=======
-```
->>>>>>> 208a5b1d791e011cf4d860210e6717aec6b3d4bd
+
