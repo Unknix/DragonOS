@@ -873,7 +873,7 @@ function getHomePageContent() {
                 <img src="/src/assets/profile.png" alt="Profile">
                 <div class="info-header-content">
                     <h1>Unknix</h1>
-                    <p>Développeur Web Full Stack</p>
+                    <p>Développeur Web</p>
                 </div>
             </div>
             
