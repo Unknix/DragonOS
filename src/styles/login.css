@@ -9,11 +9,10 @@
 }
 
 body {
-    font-family        : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family        : 'Segoe UI', Tahoma, Geneva, Verdana, sans-s    /* Keeps the image centered */erif;
     background         : linear-gradient(45deg, #1e1e2e, #302b63, #24243e);
     background-size    : 400% 400%;
     background-position: center;
-    /* Keeps the image centered */
     color              : #fff;
     display            : flex;
     align-items        : center;
@@ -177,14 +176,14 @@ input[type="text"] {
     width           : 100%;
     padding         : 15px 45px 15px 20px;
     border-radius   : 12px;
-    border          : 2px solid rgba(255, 255, 255, 0.4);
     background-color: rgba(255, 255, 255, 0.08);
     color           : #fff;
     font-size       : 17px;
     caret-color     : transparent;
-    cursor          : default;
-    /* Force le curseur par défaut même sur l'input */
-    user-select     : none;
+    cursor: text; 
+    caret-color: #fff; 
+    outline: none; 
+    border: 2px solid rgba(255, 255, 255, 0.08); 
 }
 
 input[type="text"]::placeholder {

@@ -17,7 +17,9 @@
                 <h4>Accueil</h4>
             </div>
         </div>
+        
         <nav id="navbar">
+            <a href="#" onclick="goBack()" class="button" aria-label="Retour">Retour</a>
             <a href="index.html" class="button" aria-label="Accueil">Accueil</a>
             <a href="./page/library.html" class="button" aria-label="Bibliothèques">Bibliothèques</a>
             <a href="./page/game.html" class="button" aria-label="Espace détente">Espace détente</a>
@@ -26,6 +28,7 @@
     </header>
 
     <main id="main-content">
+        
         <section>
             <p>
                 Mettre en place le dispositif <strong>Silence, on lit !</strong> au sein de <a href="https://e2c-grandlille.fr/" target="_self">l’E2C (École de la 2ᵉ Chance)</a>à Lille présente de
@@ -98,5 +101,10 @@
                 professionnellement.</p>
         </ul>
     </main>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

@@ -672,8 +672,16 @@ textarea,
 .browser-content {
     flex: 1;
     background: #13131A;
-    overflow: auto;
+    overflow-x: hidden; /* Empêche le scroll horizontal */
+    overflow-y: auto; /* Garde le scroll vertical */
     padding: 24px;
+    max-width: 100%; /* Assure que le contenu ne dépasse pas */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+.browser-content > * {
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 /* Style moderne pour le contenu du navigateur */
@@ -1464,7 +1472,7 @@ textarea,
      border-radius: 5px;
      box-shadow   : 0 4px 10px rgba(0, 0, 0, 0.5);
      width        : 150px;
-     z-index      : 10;
+     z-index      : 10000; /* Updated z-index */
    }
    
    .context-menu ul {
@@ -1995,5 +2003,87 @@ textarea,
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
     }
+}
+
+/* Styles responsives */
+@media screen and (max-width: 768px) {
+  #desktop {
+    height: calc(100vh - 60px); /* Ajuster pour la barre des tâches mobile */
+  }
+
+  #taskbar {
+    height: 60px;
+    padding: 5px;
+  }
+
+  #task-icons {
+    transform: none;
+    justify-content: space-around;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  #start-and-search {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  #search-bar {
+    display: none; /* Cacher la barre de recherche sur mobile */
+  }
+
+  /* Ajustements des fenêtres pour mobile */
+  .browser-window,
+  .terminal-window,
+  .file-explorer,
+  .profile-menu {
+    width: 100vw !important;
+    height: calc(100vh - 60px) !important;
+    top: 0 !important;
+    left: 0 !important;
+    border-radius: 0;
+    transform: none !important;
+  }
+
+  /* Ajuster la grille des projets */
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
+  }
+
+  .project-card {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* Ajuster le menu démarrer */
+  .start-menu {
+    width: 100%;
+    left: 0;
+    bottom: 60px;
+    border-radius: 0;
+  }
+}
+
+/* Orientation paysage sur mobile */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  #taskbar {
+    height: 50px;
+  }
+
+  .start-menu {
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+
+  .browser-window,
+  .terminal-window,
+  .file-explorer,
+  .profile-menu {
+    height: calc(100vh - 50px) !important;
+  }
 }
 

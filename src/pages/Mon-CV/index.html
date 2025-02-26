@@ -12,6 +12,9 @@
 </head>
 
 <body>
+    <button id="backBtn" onclick="goBack()">
+        <span>Retour</span>
+    </button>
     <div class="resume-container">
         <div class="resume-header">
             <h1>Amando Ruiz</h1>
@@ -96,7 +99,7 @@
                             <p class="period">Lycée Sonia Delaunay, Lomme ⸱ 2021 - 2022</p>
                         </div>
                         <div class="education-item">
-                            <h3>CAP VENTE</h3>
+                            <h3>CAP VENTE</h>
                             <p class="period">Lycée Sonia Delaunay, Lomme ⸱ 2018 - 2020</p>
                         </div>
                         <div class="education-item">
@@ -177,6 +180,11 @@
             </div>
         </div>
     </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 
 </html>

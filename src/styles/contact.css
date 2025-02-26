@@ -26,12 +26,60 @@
     margin-bottom: 2rem;
 }
 
+/* Style spécifique pour l'en-tête de contact */
+.contact-header {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.contact-subtitle {
+    font-size: 1.2rem;
+    color: #cccccc;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* =========================================
    1. Espacement entre les champs du formulaire
    ========================================== */
 #name-field,
 #email-field,
 #message-field {
+    margin-bottom: 1.5rem;
+}
+
+/* Amélioration du style pour le champ sujet */
+#subject-field {
     margin-bottom: 1.5rem;
 }
 
@@ -43,6 +91,14 @@
 #message-field label {
     font-size: 1rem;
     color: #4a5568; /* Gris moyen */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+#subject-field label {
+    font-size: 1rem;
+    color: #4a5568;
     font-weight: 600;
     margin-bottom: 0.5rem;
     display: block;
@@ -60,7 +116,17 @@
     border-radius: 8px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     font-size: 1rem;
-    color: #2d3748; /* Gris foncé */
+    color: #ffffff; /* Gris foncé */
+}
+
+#subject {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    color: #ffffff;
 }
 
 /* =========================================
@@ -70,8 +136,14 @@
 #email:focus,
 #message:focus {
     outline: none;
-    border-color: #3182ce; /* Bleu clair */
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.4);
+    border-color: #9d9e9c; /* Bleu clair */
+    box-shadow: 0 0 0 3px rgba(154, 156, 158, 0.4);
+}
+
+#subject:focus {
+    outline: none;
+    border-color: #9d9e9c;
+    box-shadow: 0 0 0 3px rgba(154, 156, 158, 0.4);
 }
 
 /* =========================================
@@ -81,16 +153,15 @@
     font-size: 1rem; /* Taille de police constante */
     resize: none; /* Empêche le redimensionnement */
     height: 200px; /* Hauteur du champ de texte augmentée */
-    margin-left: 10px; /* Marge à gauche */
     margin-right: 10px; /* Marge à droite */
 }
 
 /* =========================================
    6. Style du bouton de soumission
    ========================================== */
-#submit-button {
-    width: 40%; /* Largeur réduite du bouton */
-    background: linear-gradient(to right, #4299e1, #3182ce); /* Gradient bleu */
+   #submit-button {
+    width: 40%;
+    background: linear-gradient(to right, #4299e1, #3182ce);
     color: white;
     padding: 0.75rem 0;
     border-radius: 8px;
@@ -98,9 +169,10 @@
     font-weight: 600;
     transition: background 0.3s ease, transform 0.3s ease;
     cursor: pointer;
-    border: 2px solid #3182ce; /* Contour bleu */
-    display: block; /* Centrer le bouton */
-    margin: 0 auto; /* Centrer horizontalement */
+    border: none; /* Suppression de la bordure */
+    outline: none; /* Suppression du contour */
+    display: block;
+    margin: 0 auto;
 }
 
 /* =========================================
@@ -122,17 +194,16 @@
    9. Style de la conteneur de contact
    ========================================== */
 .contact-container {
+    position: relative;
     width: 100%;
-    height: 100%;
-    background: #1a1a1a;
-    color: #fff;
-    padding: 40px;
-    overflow-y: auto;
-    overflow-x: hidden; /* Empêche uniquement le défilement horizontal */
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    padding: 40px 20px;
+    background: transparent;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Scrollbar personnalisé */
@@ -171,6 +242,9 @@
     background: #2a2a2a;
     border-radius: 12px; /* Augmenté de 8px à 12px */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 40px;  /* Ajout d'une marge en bas */
 }
 
 /* =========================================
@@ -179,7 +253,22 @@
 .form-group {
     position: relative;
     margin-bottom: 35px; /* Augmenté de 25px à 35px */
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.5s forwards;
 }
+
+@keyframes fadeInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
 
 .form-group label {
     position: absolute;
@@ -231,7 +320,7 @@
 
 .contact-form button {
     padding: 1rem 2rem;
-    background: linear-gradient(45deg, #6c63ff, #ff6584);
+    background: linear-gradient(45deg, #2a2a2a, #2a2a2a);
     border: none;
     border-radius: 8px;
     color: white;
@@ -241,11 +330,6 @@
     transition: all 0.3s ease;
 }
 
-.contact-form button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.2);
-}
-
 .contact-form button:active {
     transform: translateY(0);
 }
@@ -253,44 +337,132 @@
 .form-header {
     text-align: center;
     margin-bottom: 40px; /* Augmenté de 30px à 40px */
+    animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .form-header h2 {
-    font-size: 32px; /* Augmenté de 24px à 32px */
-    color: #fff;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-align: center;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.form-header h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #00a6fb, #0582ca);
 }
 
 .form-header p {
-    color: #999;
-    font-size: 16px; /* Augmenté de 14px à 16px */
-    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #cccccc;
+    text-align: center;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
 }
 
 .submit-btn {
     width: 100%;
-    padding: 15px;
-    background: #0078d4;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #808080 0%, #666666 100%); /* Changé pour un dégradé de gris */
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-top: 20px;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
 }
 
 .submit-btn:hover {
-    background: #0086f0;
+    background: linear-gradient(135deg, #999999 0%, #808080 100%); /* Dégradé de gris plus clair au survol */
     transform: translateY(-2px);
 }
 
+.submit-btn:hover:before {
+    left: 100%;
+}
+
 .submit-btn:active {
-    transform: translateY(0);
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 166, 251, 0.2);
+}
+
+.submit-btn i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Animation de chargement lors de l'envoi */
+.submit-btn.loading {
+    background: linear-gradient(135deg, #0582ca 0%, #006494 100%);
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.submit-btn.loading i {
+    animation: rotating 1s linear infinite;
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .contact-info {
@@ -303,6 +475,17 @@
     width: 95%; /* Ajusté pour éviter le débordement */
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Style des boîtes d'information de contact */
+.contact-info-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px; /* Réduit de 50px à 30px */
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;  /* Ajout d'une marge en bas */
 }
 
 .info-item {
@@ -320,7 +503,7 @@
 
 .info-item i {
     font-size: 24px;
-    color: #6c63ff;
+    color: #cccccc; /* Changé de #6c63ff à #cccccc */
     margin-bottom: 16px;
 }
 
@@ -338,18 +521,81 @@
 /* Style pour les messages d'erreur */
 .error-message {
     color: #ff4444;
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    transform: translateY(10px);
+    opacity: 0;
+    animation: fadeInUp 0.3s forwards;
 }
 
-/* Style pour le message de succès */
+/* Style amélioré pour le message de succès */
 .success-message {
-    background: #28a745;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(40, 167, 69, 0.95);
     color: white;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
+    padding: 15px 30px;
+    border-radius: 8px;
     text-align: center;
+    z-index: 99999; /* Augmenter le z-index */
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease forwards;
+    min-width: 200px;
+    backdrop-filter: blur(5px);
+    pointer-events: none; /* Empêcher les interactions avec le message */
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    85% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+}
+
+/* Style des boîtes d'information de contact */
+.contact-info-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px; /* Réduit de 50px à 30px */
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;  /* Ajout d'une marge en bas */
+}
+
+.info-box {
+    background: #2a2a2a;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.info-box:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive design pour les boîtes d'info */
+@media screen and (max-width: 768px) {
+    .contact-info-boxes {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
 }
 
 /* Ajustements pour les petits écrans */
@@ -366,4 +612,69 @@
     .info-item {
         padding: 15px;
     }
+
+  .contact-container {
+    padding: 20px;
+  }
+
+  .contact-form {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .form-header h2 {
+    font-size: 24px;
+  }
+
+  .form-header p {
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .info-item {
+    padding: 15px;
+  }
+}
+
+.browser-content.contact-page {
+    background: #363535;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.browser-content.contact-page::-webkit-scrollbar {
+    width: 8px;
+}
+
+.browser-content.contact-page::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+.browser-content.contact-page::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.browser-content.contact-page::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

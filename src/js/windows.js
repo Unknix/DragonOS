@@ -199,88 +199,210 @@ function loadContactPage() {
     }
 
     const browserContent = document.querySelector('.browser-content');
+    browserContent.classList.add('contact-page'); // Ajouter une classe spécifique pour la page de contact
     loadContactPageContent(browserContent);
     navigationHistory.push({ type: 'contact' });
+
+    // Mettre à jour la barre d'URL
+    const urlInput = document.querySelector('.url-bar input');
+    urlInput.value = 'gdbuddy.com/contact';
 }
 
 // Nouvelle fonction pour le contenu de la page contact
 function loadContactPageContent(container) {
     container.innerHTML = `
         <div class="contact-container">
-            <div class="form-header">
-                <h2>Contactez-nous</h2>
-                <p>N'hésitez pas à nous envoyer un message, nous vous répondrons dans les plus brefs délais.</p>
+            <div class="contact-header">
+                <h1 class="contact-title">Contactez-nous</h1>
+                <p class="contact-subtitle">Nous sommes là pour vous aider. N'hésitez pas à nous contacter pour toute question.</p>
             </div>
-            
-            <form class="contact-form" action="https://formspree.io/f/xdkozrld" method="POST">
+            <form class="contact-form" action="https://formspree.io/f/xdkozrld" method="POST" id="contactForm">
                 <div class="form-group">
+                    <input type="text" id="name" name="name" required>
                     <label for="name">Nom complet</label>
-                    <input type="text" id="name" name="name" required placeholder="Votre nom">
+                    <div class="error-message" id="nameError"></div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                    <input type="email" id="email" name="email" required>
+                    <label for="email">Adresse email</label>
+                    <div class="error-message" id="emailError"></div>
                 </div>
                 
                 <div class="form-group">
+                    <input type="text" id="subject" name="subject" required>
                     <label for="subject">Sujet</label>
-                    <input type="text" id="subject" name="subject" required placeholder="Sujet de votre message">
+                    <div class="error-message" id="subjectError"></div>
                 </div>
                 
                 <div class="form-group">
+                    <textarea id="message" name="message" required></textarea>
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
+                    <div class="error-message" id="messageError"></div>
                 </div>
                 
-                <button type="submit" class="submit-btn">Envoyer le message</button>
+                <button type="submit" class="submit-btn">
+                    <span>Envoyer le message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
             </form>
-            
-            <div class="contact-info">
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Adresse</h3>
-                    <p>123 Rue de l'Innovation</p>
-                </div>
-                
-                <div class="info-item">
+
+            <div class="contact-info-boxes">
+                <div class="info-box">
                     <i class="fas fa-phone"></i>
                     <h3>Téléphone</h3>
-                    <p>+33 1 23 45 67 89</p>
+                    <p>+33 6 12 34 56 78</p>
                 </div>
                 
-                <div class="info-item">
+                <div class="info-box">
                     <i class="fas fa-envelope"></i>
                     <h3>Email</h3>
                     <p>contact@gdbuddy.com</p>
+                </div>
+                
+                <div class="info-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Adresse</h3>
+                    <p>48 Rue des Canonniers, 59000 Lille</p>
                 </div>
             </div>
         </div>
     `;
 
-    const form = container.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', handleContactFormSubmit);
-    }
+    // Validation du formulaire
+    const form = container.querySelector('#contactForm');
+    const inputs = form.querySelectorAll('input, textarea');
+
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.parentElement.classList.remove('focused');
+            }
+        });
+
+        // Validation en temps réel
+        input.addEventListener('input', () => validateField(input));
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if (validateForm(form)) {
+            const submitBtn = form.querySelector('.submit-btn');
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch"></i><span>Envoi en cours...</span>';
+            
+            try {
+                const response = await submitForm(form);
+                if (response.ok) {
+                    showSuccessMessage(form);
+                    form.reset();
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+            } catch (error) {
+                showErrorMessage(form, 'Une erreur est survenue. Veuillez réessayer.');
+            } finally {
+                submitBtn.classList.remove('loading');
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Envoyer le message</span>';
+            }
+        }
+    });
 }
 
-// Ajouter cette fonction pour gérer la soumission du formulaire
-async function handleContactFormSubmit(e) {
-    e.preventDefault();
-    try {
-        const response = await fetch(e.target.action, {
-            method: 'POST',
-            body: new FormData(e.target)
-        });
-        if (response.ok) {
-            alert('Message envoyé avec succès !');
-            e.target.reset();
-        } else {
-            throw new Error('Erreur lors de l\'envoi');
-        }
-    } catch (error) {
-        alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+// Fonctions utilitaires pour la validation
+function validateField(input) {
+    const errorElement = document.getElementById(`${input.id}Error`);
+    let isValid = true;
+    let errorMessage = '';
+
+    switch (input.id) {
+        case 'email':
+            isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+            errorMessage = 'Veuillez entrer une adresse email valide';
+            break;
+        case 'name':
+            isValid = input.value.length >= 2;
+            errorMessage = 'Le nom doit contenir au moins 2 caractères';
+            break;
+        case 'subject':
+            isValid = input.value.length >= 3;
+            errorMessage = 'Le sujet doit contenir au moins 3 caractères';
+            break;
+        case 'message':
+            isValid = input.value.length >= 10;
+            errorMessage = 'Le message doit contenir au moins 10 caractères';
+            break;
     }
+
+    if (!isValid && input.value) {
+        errorElement.textContent = errorMessage;
+        errorElement.style.display = 'block';
+    } else {
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+    }
+
+    return isValid;
+}
+
+function validateForm(form) {
+    const inputs = form.querySelectorAll('input, textarea');
+    let isValid = true;
+
+    inputs.forEach(input => {
+        if (!validateField(input)) {
+            isValid = false;
+        }
+    });
+
+    return isValid;
+}
+
+async function submitForm(form) {
+    const formData = new FormData(form);
+    return await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+}
+
+function showSuccessMessage(form) {
+    // Supprimer tout message de succès existant
+    const existingMessage = document.querySelector('.success-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.textContent = 'Message envoyé avec succès !';
+    
+    // Ajouter le message directement au body pour qu'il soit au-dessus de tout
+    document.body.appendChild(successMessage);
+
+    // Nettoyer le message après l'animation
+    setTimeout(() => {
+        if (successMessage && successMessage.parentNode) {
+            successMessage.parentNode.removeChild(successMessage);
+        }
+    }, 3000);
+}
+
+function showErrorMessage(form, message) {
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'error-message';
+    errorMessage.textContent = message;
+    form.parentElement.insertBefore(errorMessage, form);
+    
+    setTimeout(() => errorMessage.remove(), 5000);
 }
 
 // Lors du clic sur l'icône du terminal, afficher ou masquer la fenêtre
@@ -739,9 +861,9 @@ const navigationHistory = {
 
     forward() {
         if (this.canGoForward()) {
-            this.currentIndex++;
-            this.loadPage(this.pages[this.currentIndex]);
-            this.updateButtons();
+        this.currentIndex++;
+        this.loadPage(this.pages[this.currentIndex]);
+        this.updateButtons();
         }
     },
 
@@ -804,6 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Ajouter les nouvelles fonctions de chargement de page
 function loadProjectsPage() {
     const browserContent = document.querySelector('.browser-content');
+    browserContent.classList.remove('contact-page'); // Retirer la classe
     browserContent.innerHTML = `
         <div class="projects-page">
             <h2>Mes Projets</h2>
@@ -811,10 +934,15 @@ function loadProjectsPage() {
         </div>
     `;
     navigationHistory.push({ type: 'projects' });
+
+    // Mettre à jour la barre d'URL
+    const urlInput = document.querySelector('.url-bar input');
+    urlInput.value = 'gdbuddy.com/projects';
 }
 
 function loadAboutPage() {
     const browserContent = document.querySelector('.browser-content');
+    browserContent.classList.remove('contact-page'); // Retirer la classe
     browserContent.innerHTML = `
         <div class="about-page">
             <h2>À Propos de Moi</h2>
@@ -822,10 +950,15 @@ function loadAboutPage() {
         </div>
     `;
     navigationHistory.push({ type: 'about' });
+
+    // Mettre à jour la barre d'URL
+    const urlInput = document.querySelector('.url-bar input');
+    urlInput.value = 'gdbuddy.com/about';
 }
 
 function loadServicesPage() {
     const browserContent = document.querySelector('.browser-content');
+    browserContent.classList.remove('contact-page'); // Retirer la classe
     browserContent.innerHTML = `
         <div class="services-page">
             <h2>Mes Services</h2>
@@ -833,6 +966,10 @@ function loadServicesPage() {
         </div>
     `;
     navigationHistory.push({ type: 'services' });
+
+    // Mettre à jour la barre d'URL
+    const urlInput = document.querySelector('.url-bar input');
+    urlInput.value = 'gdbuddy.com/services';
 }
 
 // Initialiser l'historique avec la page d'accueil lors de l'ouverture du navigateur
@@ -867,13 +1004,15 @@ document.querySelector('.fa-redo').addEventListener('click', () => {
 
 // Fonction pour obtenir le contenu de la page d'accueil
 function getHomePageContent() {
+    const browserContent = document.querySelector('.browser-content');
+    browserContent.classList.remove('contact-page'); // Retirer la classe
     return `
         <div class="browser-homepage">
             <div class="info-header">
                 <img src="/src/assets/profile.png" alt="Profile">
                 <div class="info-header-content">
-                    <h1>Unknix</h1>
-                    <p>Développeur Web</p>
+                    <h1>Amando Ruiz</h1>
+                    <p>Développeuse Web</p>
                 </div>
             </div>
             
@@ -930,11 +1069,28 @@ browserIcon.addEventListener('click', () => {
     }
 });
 
-// Ajouter ces gestionnaires d'événements pour le bouton contact
+// Supprimer ou remplacer ces lignes qui causent l'erreur
+/*
 document.querySelector('.contact-button').addEventListener('mouseenter', function () {
     this.style.transform = 'translateY(-5px)';
 });
 
 document.querySelector('.contact-button').addEventListener('mouseleave', function () {
     this.style.transform = 'translateY(0)';
+});
+*/
+
+// Si vous voulez garder la fonctionnalité, modifiez le sélecteur pour cibler le bon élément,
+// par exemple le bouton submit du formulaire de contact :
+document.addEventListener('DOMContentLoaded', () => {
+    const submitBtn = document.querySelector('.submit-btn');
+    if (submitBtn) {
+        submitBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        submitBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    }
 });

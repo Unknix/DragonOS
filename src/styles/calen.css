@@ -132,3 +132,33 @@
 body {
     font-family: 'Arial', sans-serif;
 }
+
+/* Styles responsives pour le calendrier */
+@media screen and (max-width: 768px) {
+  .calendar {
+    width: calc(100% - 20px);
+    left: 10px;
+    right: 10px;
+    bottom: 70px;
+    padding: 15px;
+  }
+
+  .calendar-days {
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .calendar-days span:not(.day-name) {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .calendar-header span {
+    font-size: 16px;
+    padding: 6px;
+  }
+
+  .calendar-days .day-name {
+    font-size: 12px;
+  }
+}
